@@ -1,13 +1,17 @@
-## Sample Hive UDF Maven project with a few simple UDFs.
+# Sample Hive UDF Maven project with a few simple UDFs.
 
 Use this if you want to write a quick Hive UDF with no hassle.
 For a quick start just create some classes in src/main/java/com/mycompany/hiveudf.
 
 For production JARs create your own Maven project and use this pom.xml as a starting point.
 
-# Quickstart:
+## Quickstart:
 
-1. mvn package
+1. Build the JAR:
+    ```c
+    mvn package
+    ```
+
 2. Start Hive CLI with the JAR in your classpath:
     ```c
     export HADOOP_CLASSPATH=target/sample-hiveudf-1.0-SNAPSHOT.jar ; hive
@@ -23,7 +27,7 @@ For production JARs create your own Maven project and use this pom.xml as a star
     select my_lower("UPPER CASE LETTERS");
     ```
 
-# For production:
+## For production:
 
 1. Copy your JAR to HDFS where HiveServer2 will be able to read it.
 2. Create a permanent function:
@@ -31,4 +35,4 @@ For production JARs create your own Maven project and use this pom.xml as a star
     CREATE FUNCTION myfunc AS 'myclass' USING JAR 'hdfs:///path/to/jar';
     ```
 
-3. Call the functions from your ODBC/JDBC clients.
+3. Call the functions from your ODBC/JDBC clients via HiveServer2.
