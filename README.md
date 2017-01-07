@@ -32,7 +32,14 @@ For production JARs create your own Maven project and use this pom.xml as a star
 1. Copy your JAR to HDFS where HiveServer2 will be able to read it.
 2. Create a permanent function:
     ```c
-    CREATE FUNCTION myfunc AS 'myclass' USING JAR 'hdfs:///path/to/jar';
+    sudo -u hdfs hdfs dfs -mkdir /apps/hive/functions
+    sudo -u hdfs hdfs dfs -chown hive:hive /apps/hive/functions
+    cp sample-hiveudf-1.0-SNAPSHOT.jar /tmp
+    sudo -u hive hdfs dfs -copyFromLocal /tmp/sample-hiveudf-1.0-SNAPSHOT.jar /apps/hive/functions
+    ```
+3. In beeline:
+    ```c
+    CREATE FUNCTION my_lower AS 'com.mycompany.hiveudf.CustomLower' USING JAR 'hdfs:////apps/hive/functions/sample-hiveudf-1.0-SNAPSHOT.jar';
     ```
 
 3. Call the functions from your ODBC/JDBC clients via HiveServer2.
