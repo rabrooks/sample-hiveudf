@@ -35,7 +35,7 @@ For production JARs create your own Maven project and use this pom.xml as a star
     sudo -u hdfs hdfs dfs -mkdir /apps/hive/functions
     sudo -u hdfs hdfs dfs -chown hive:hive /apps/hive/functions
     cp sample-hiveudf-1.0-SNAPSHOT.jar /tmp
-    sudo -u hive hdfs dfs -copyFromLocal /tmp/sample-hiveudf-1.0-SNAPSHOT.jar /apps/hive/functions
+    sudo -u hive hdfs dfs -copyFromLocal -f /tmp/sample-hiveudf-1.0-SNAPSHOT.jar /apps/hive/functions
     ```
 3. In beeline:
     ```c
